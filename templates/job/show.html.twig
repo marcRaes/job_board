@@ -3,11 +3,10 @@
 {% block title %}Hello JobController!{% endblock %}
 
 {% block body %}
-    <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4">
-        <h1 class="text-4x1 text-center">{{ offre.nom }}</h1>
-    </div>
-
     <div class="container mx-auto px-4">
         {% include 'job/_offre.html.twig' %}
+        <p class="mt-4">
+            <a href="{{ path('app_job_edit', { 'id': offre.id }) }}" class="bg-indigo-500 rounded-lg p-2 shadow-lg hover:bg-indigo-700">Editer l'offre</a>
+        </p>
     </div>
 {% endblock %}

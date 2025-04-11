@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Offre;
 use App\Form\OffreType;
 use App\Repository\OffreRepository;
+use App\Service\FormHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,16 +31,19 @@ final class JobController extends AbstractController
     }
 
     #[Route('/new', name: 'app_job_new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/edit/{id}', name: 'app_job_edit')]
+    public function form(Request $request, FormHandler $formHandler, Offre $offre = null): Response
     {
-        $offre = new Offre();
+        $isNew = false;
+        if (!$offre) {
+            $offre = new Offre();
+            $isNew = true;
+        }
+
         $form = $this->createForm(OffreType::class, $offre);
 
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($offre);
-            $entityManager->flush();
+        if($formHandler->handleForm($offre, $form, $request)) {
+            $this->addFlash('success', $isNew ? 'Offre créée avec succès !': 'Offre modifiée avec succès !');
 
             return $this->redirectToRoute('app_job_show', [
                 'id' => $offre->getId()
@@ -48,6 +52,7 @@ final class JobController extends AbstractController
 
         return $this->render('job/new.html.twig', [
             'form' => $form,
+            'isNew' => $isNew,
         ]);
     }
 }
