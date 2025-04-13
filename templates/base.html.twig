@@ -13,17 +13,49 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4">
-            <h1 class="text-4xl text-center">Job Board</h1>
-        </div>
+    <body class="bg-gray-100">
+        <header class="bg-white shadow-md p-4">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Job Board</h1>
+                <a href="{{ path('app_job_new') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Ajouter une offre
+                </a>
+            </div>
+        </header>
 
-        {% for label, messages in app.flashes %}
+        {#{% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="flash-{{ label }} mx-auto max-w-sm my-4 items-center gap-x-4 rounded-xl bg-white p-4 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
                     <div>
                         <div class="text-xl font-medium text-black dark:text-white">{{ message }}</div>
                     </div>
+                </div>
+            {% endfor %}
+        {% endfor %}#}
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }} mx-auto max-w-sm my-4 flex items-center text-center justify-between gap-x-4 rounded-xl p-4 shadow-lg outline outline-black/5 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10
+            {% if label == 'success' %}
+                bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300
+            {% elseif label == 'error' %}
+                bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300
+            {% elseif label == 'warning' %}
+                bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300
+            {% elseif label == 'info' %}
+                bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300
+            {% else %}
+                bg-white text-black dark:bg-slate-800 dark:text-white
+            {% endif %}
+        ">
+                    <div class="flex-1">
+                        <div class="text-xl font-medium">{{ message }}</div>
+                    </div>
+                    <button class="text-gray-500 hover:text-gray-700 focus:outline-none" onclick="this.parentElement.remove()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
             {% endfor %}
         {% endfor %}

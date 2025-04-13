@@ -20,44 +20,26 @@ class OffreType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom de l\'offre',
-                'attr' => [
-                    'class' => 'border-2 border-blue-500 rounded-lg p-2',
-                ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'offre',
-                'attr' => [
-                    'class' => 'border-2 border-blue-500 rounded-lg p-2',
-                ]
             ])
             ->add('salaire', TextType::class, [
                 'label' => 'Salaire de l\'offre',
-                'attr' => [
-                    'class' => 'border-2 border-blue-500 rounded-lg p-2',
-                ]
             ])
             ->add('service', EntityType::class, [
                 'class' => Service::class,
                 'choice_label' => 'nom',
                 'label' => 'Le service de l\'offre',
-                'attr' => [
-                    'class' => 'border-2 border-blue-500 rounded-lg p-2',
-                ]
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'choice_label' => 'nom',
                 'multiple' => true,
                 'label' => 'Tags de l\'offre',
-                'attr' => [
-                    'class' => 'border-2 border-blue-500 rounded-lg p-2',
-                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Créer l\'offre',
-                'attr' => [
-                    'class' => 'bg-blue-500 p-1',
-                ]
             ])
         ;
     }

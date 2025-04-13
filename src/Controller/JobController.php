@@ -43,7 +43,7 @@ final class JobController extends AbstractController
         $form = $this->createForm(OffreType::class, $offre);
 
         if($formHandler->handleForm($offre, $form, $request)) {
-            $this->addFlash('success', $isNew ? 'Offre créée avec succès !': 'Offre modifiée avec succès !');
+            $this->addFlash('success', $isNew ? 'L\'offre a été créée avec succès!': 'L\'offre a été modifiée avec succès !');
 
             return $this->redirectToRoute('app_job_show', [
                 'id' => $offre->getId()
@@ -62,7 +62,7 @@ final class JobController extends AbstractController
         $entityManager->remove($offre);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Offre supprimée avec succès !');
+        $this->addFlash('success', 'L\'offre a été supprimée avec succès!');
 
         return $this->redirectToRoute('app_job');
     }
