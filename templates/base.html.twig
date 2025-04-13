@@ -23,16 +23,6 @@
             </div>
         </header>
 
-        {#{% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="flash-{{ label }} mx-auto max-w-sm my-4 items-center gap-x-4 rounded-xl bg-white p-4 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-                    <div>
-                        <div class="text-xl font-medium text-black dark:text-white">{{ message }}</div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endfor %}#}
-
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="flash-{{ label }} mx-auto max-w-sm my-4 flex items-center text-center justify-between gap-x-4 rounded-xl p-4 shadow-lg outline outline-black/5 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10
