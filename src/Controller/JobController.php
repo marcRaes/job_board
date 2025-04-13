@@ -55,4 +55,15 @@ final class JobController extends AbstractController
             'isNew' => $isNew,
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'app_job_delete')]
+    public function delete(Offre $offre, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($offre);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Offre supprimée avec succès !');
+
+        return $this->redirectToRoute('app_job');
+    }
 }
